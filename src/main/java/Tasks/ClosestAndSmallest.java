@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class ClosestAndSmallest {
     public static void main(String[] args) {
         System.out.println(Arrays.deepToString(
-                closest("456899 50 11992 176 272293 163 389128 96 290193 85 52")));
+                closest("456899 50 11992 176 272293 163 0 0 290193 85 52")));
     }
     public static int[][] closest(String strng) {
         if (strng.length() == 0) {
@@ -24,6 +24,9 @@ public class ClosestAndSmallest {
             }
             weights[i] = sum;
         }
+
+        System.out.println(Arrays.toString(numbers));
+        System.out.println(Arrays.toString(weights));
 
         int[] sortWeights = Arrays.copyOf(weights, weights.length);
         int[] sortNumbers = Arrays.copyOf(numbers, numbers.length);
@@ -45,6 +48,8 @@ public class ClosestAndSmallest {
                 }
             }
         }
+
+        System.out.println(Arrays.toString(sortWeights));
 
         int difference = Integer.MAX_VALUE;
         int number1 = 0;
@@ -68,9 +73,14 @@ public class ClosestAndSmallest {
         for (int i = 0; i < numbers.length; i++) {
             if (numbers[i] == number1) {
                 index1 = i;
+                break;
             }
+        }
+
+        for (int i = numbers.length - 1; i >= 0 ; i--) {
             if (numbers[i] == number2) {
                 index2 = i;
+                break;
             }
         }
 
