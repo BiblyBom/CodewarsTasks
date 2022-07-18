@@ -1,15 +1,16 @@
 package Tasks;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class ClosestAndSmallest {
     public static void main(String[] args) {
         System.out.println(Arrays.deepToString(
-                closest("239382 162 254765 182 485944 468751 49780 108 54")));
+                closest("456899 50 11992 176 272293 163 389128 96 290193 85 52")));
     }
     public static int[][] closest(String strng) {
+        if (strng.length() == 0) {
+            return null;
+        }
         String[] strNumbers = strng.split(" ");
         int[] numbers = new int[strNumbers.length];
         int[] weights = new int[strNumbers.length];
@@ -23,8 +24,6 @@ public class ClosestAndSmallest {
             }
             weights[i] = sum;
         }
-        System.out.println(Arrays.toString(numbers));
-        System.out.println(Arrays.toString(weights));
 
         int[] sortWeights = Arrays.copyOf(weights, weights.length);
         int[] sortNumbers = Arrays.copyOf(numbers, numbers.length);
@@ -47,12 +46,11 @@ public class ClosestAndSmallest {
             }
         }
 
-        System.out.println(Arrays.toString(sortNumbers));
-        System.out.println(Arrays.toString(sortWeights));
-
         int difference = Integer.MAX_VALUE;
         int number1 = 0;
         int number2 = 0;
+        int weight1 = 0;
+        int weight2 = 0;
         int index1 = 0;
         int index2 = 0;
 
@@ -62,6 +60,8 @@ public class ClosestAndSmallest {
                 difference = cur;
                 number1 = sortNumbers[i];
                 number2 = sortNumbers[i+1];
+                weight1 = sortWeights[i];
+                weight2 = sortWeights[i + 1];
             }
         }
 
@@ -74,14 +74,12 @@ public class ClosestAndSmallest {
             }
         }
 
-        System.out.println(difference + " " + number1 + " " + number2);
-
         int[][] result = new int[2][3];
-        result[0][0] = sortWeights[0];
+        result[0][0] = weight1;
         result[0][1] = index1;
         result[0][2] = number1;
 
-        result[1][0] = sortWeights[1];
+        result[1][0] = weight2;
         result[1][1] = index2;
         result[1][2] = number2;
 
